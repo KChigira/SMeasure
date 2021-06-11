@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="anchor" onKeyPressed="#keyPress" prefHeight="600.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GrainMeasureController">
+   <top>
+      <HBox prefHeight="40.0" prefWidth="830.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="browse" mnemonicParsing="false" onAction="#browseClicked" prefHeight="20.0" prefWidth="60.0" text="browse" />
+            <Label fx:id="filename" prefHeight="30.0" prefWidth="400.0" text="file name" />
+            <Button fx:id="backbutton" mnemonicParsing="false" onAction="#backClicked" text="back" />
+            <Button fx:id="nextbutton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#nextClicked" text="next" textAlignment="CENTER" />
+            <Label text="品種名" textFill="#00b400">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfield1" prefWidth="150.0" text="001" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <HBox spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fx:id="imageview" fitHeight="400.0" fitWidth="500.0" onMouseClicked="#click" onMouseDragged="#drag" onMouseReleased="#release" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="underLabel" text=" " textFill="BLUE">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </center>
+   <right>
+      <VBox prefHeight="460.0" prefWidth="300.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="os" text="外短径：0.00mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="ol" text="外長径：0.00mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="is" text="内短径：0.00mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="il" text="内長径：0.00mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="sm" text="断面係数：00.00mm3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="unit" text="10mm = 10px" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="renewButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#renew" text="再計算" />
+                  <CheckBox fx:id="binary" mnemonicParsing="false" onAction="#binaryChecked" text="binary" />
+                  <CheckBox fx:id="adjust" mnemonicParsing="false" onAction="#adjustChecked" text="adjust mode" />
+               </children>
+            </HBox>
+            <Label text="ぼかし" />
+            <Slider fx:id="blurSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Label text="感度" />
+            <Slider fx:id="sensitivitySlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                  <TableColumn fx:id="colname" prefWidth="40.0" text="品種" />
+                <TableColumn fx:id="col0" prefWidth="30.0" text="ID" />
+                <TableColumn fx:id="col1" prefWidth="50.0" text="外短径" />
+                  <TableColumn fx:id="col2" prefWidth="50.0" text="外長径" />
+                  <TableColumn fx:id="col3" prefWidth="50.0" text="内短径" />
+                  <TableColumn fx:id="col4" prefWidth="50.0" text="内長径" />
+              </columns>
+            </TableView>
+            <HBox spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#writeValue" text="記録" />
+                  <Button mnemonicParsing="false" onAction="#eraseValue" text="消去" />
+                  <Button mnemonicParsing="false" onAction="#saveValue" text="保存" />
+                  <Button mnemonicParsing="false" onAction="#savePicture" text="画像保存" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+         </padding>
+      </VBox>
+   </right>
+</BorderPane>
