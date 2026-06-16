@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane fx:id="anchor" onKeyPressed="#keyPress" xmlns="http://javafx.com/javafx/25.0.3" 
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SMeasureController">
+   <top>
+      <HBox prefHeight="40.0" prefWidth="670.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="browse" mnemonicParsing="false" onAction="#browseClicked" prefHeight="20.0" prefWidth="100.0" text="browse" />
+            <Label fx:id="filename" prefHeight="30.0" prefWidth="400.0" text="file name" />
+            <Button fx:id="backbutton" mnemonicParsing="false" onAction="#backClicked" prefHeight="20.0" prefWidth="100.0" text="back" />
+            <Button fx:id="nextbutton" mnemonicParsing="false" onAction="#nextClicked" prefHeight="20.0" prefWidth="100.0" text="next" />
+            <Label text="Cultivar" textFill="#00b400" prefWidth="100.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfield1" prefWidth="200.0" text="001" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <HBox spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fx:id="imageview" onMouseClicked="#click" onMouseDragged="#drag" 
+                             onMouseReleased="#release" pickOnBounds="true" preserveRatio="true"/>
+                  <Label fx:id="underLabel" text=" " textFill="BLUE">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </center>
+   <right>
+      <VBox prefWidth="500.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="os" text="Outer diameter of minor axis: 0.00 mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="ol" text="Outer diameter of major axis: 0.00 mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="is" text="Inner diameter of minor axis: 0.00 mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="il" text="Inner diameter of major axis: 0.00 mm">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="sm" text="Section modulus: 00.00 mm3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="unit" text="10mm = 10px" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="renewButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#renew" text="Recalculation" />
+                  <CheckBox fx:id="binary" mnemonicParsing="false" onAction="#binaryChecked" text="binary" />
+                  <CheckBox fx:id="adjust" mnemonicParsing="false" onAction="#adjustChecked" text="adjust mode" />
+               </children>
+            </HBox>
+            <Label text="Blur" />
+            <Slider fx:id="blurSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Label text="Sensitivity" />
+            <Slider fx:id="sensitivitySlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                  <TableColumn fx:id="colname" prefWidth="100.0" text="Cultivar" />
+                  <TableColumn fx:id="col0" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="col1" prefWidth="50.0" text="a1" />
+                  <TableColumn fx:id="col2" prefWidth="50.0" text="b1" />
+                  <TableColumn fx:id="col3" prefWidth="50.0" text="a2" />
+                  <TableColumn fx:id="col4" prefWidth="50.0" text="b2" />
+                  <TableColumn fx:id="col5" prefWidth="50.0" text="SM" />
+              </columns>
+              <placeholder>
+                  <Label text="No data" />
+              </placeholder>
+            </TableView>
+            <HBox spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#writeValue" text="Record" />
+                  <Button mnemonicParsing="false" onAction="#eraseValue" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#saveValue" text="Save data" />
+                  <Button mnemonicParsing="false" onAction="#savePicture" text="Save Picture" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+         </padding>
+      </VBox>
+   </right>
+</BorderPane>
