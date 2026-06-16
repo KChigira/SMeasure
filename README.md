@@ -1,2 +1,2 @@
 # SMeasure
-単子葉植物における稈断面の内外径を画像解析により計測する
+Measuring the inner and outer diameters of the culm cross-section in monocot plants using the OpenCV libraries.
