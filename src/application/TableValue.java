@@ -11,10 +11,7 @@ public class TableValue {
     private StringProperty name, os, ol, is, il, sm;
 
     public TableValue(String n, int anID, Values v, double mmperpx) {
-    	if(n == null) {
-    		name = new SimpleStringProperty("null");;
-    	}
-    	name = new SimpleStringProperty(n);
+    	name = new SimpleStringProperty(n == null ? "" : n);
         id = new SimpleIntegerProperty(anID);
         os = new SimpleStringProperty(String.format("%1$.2f", v.getShorterOuterDiameter() * mmperpx));
         ol = new SimpleStringProperty(String.format("%1$.2f", v.getLongerOuterDiameter() * mmperpx));

@@ -18,7 +18,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)loader.load();
 			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("SMeasure v2.00");
+			primaryStage.setTitle("SMeasure v2.01");
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
 			primaryStage.show();

@@ -474,6 +474,7 @@ public class SMeasureController {
 
 		case Z:
 			table.getItems().add(new TableValue(this.textfield1.getText(), this.currentSelectedRow, new Values(0,0,0,0,new Rect()), mmperpx));
+			this.recordResions.add(null);
 			this.currentSelectedRow++;
 			this.underLabel.setText("A blank value was recorded.");
 			break;
@@ -502,7 +503,9 @@ public class SMeasureController {
 	public void eraseValue() {
 		if(this.currentSelectedRow<2) return;
 		table.getItems().remove(this.currentSelectedRow - 2);
-		this.recordResions.remove(this.recordResions.size() - 1);
+		if(!this.recordResions.isEmpty()) {     //added
+	        this.recordResions.remove(this.recordResions.size() - 1);
+	    }
 		this.currentSelectedRow--;
 		this.underLabel.setText("A record was deleted.");
 	}
@@ -525,12 +528,13 @@ public class SMeasureController {
 
 	    try {
 	    	PrintWriter pw = new PrintWriter(this.savefile);
-	    	pw.println("name,ID,outer_short,outer_long,inner_short,inner_long");
-	        for(int i=0; i<(currentSelectedRow - 1); i++){
-	        	String r = String.join(",", String.valueOf(colname.getCellData(i)), String.valueOf(col0.getCellData(i)),String.valueOf(col1.getCellData(i)),
-	        				String.valueOf(col2.getCellData(i)), String.valueOf(col3.getCellData(i)), String.valueOf(col4.getCellData(i)));
-	        	pw.println(r);
-	        }
+	    	pw.println("name,ID,outer_short,outer_long,inner_short,inner_long,section_modulus");
+	    	for(int i=0; i<table.getItems().size(); i++){
+	    	    String r = String.join(",", String.valueOf(colname.getCellData(i)), String.valueOf(col0.getCellData(i)),String.valueOf(col1.getCellData(i)),
+	    	                String.valueOf(col2.getCellData(i)), String.valueOf(col3.getCellData(i)), String.valueOf(col4.getCellData(i)),
+	    	                String.valueOf(col5.getCellData(i)));
+	    	    pw.println(r);
+	    	}
 	        pw.close();
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -572,6 +576,7 @@ public class SMeasureController {
 
 		Mat m = this.processedImage.clone();
 		for(int i = 0; i<this.recordResions.size(); i++) {
+			if(this.recordResions.get(i) == null) continue;
 			Imgproc.rectangle(m, this.recordResions.get(i).br(), this.recordResions.get(i).tl(), new Scalar(255, 0, 255), 2);
 		}
 		this.recordResions.clear();
